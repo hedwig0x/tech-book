@@ -15,8 +15,11 @@ There are two main options for this approach:
 
 2. **Runtime**: An precompiled execution runtime developed using Wasm and compiled into machine code. This concept is used by EVM, SVM, ERC20 runtimes.
 
-For example, Fluent presently incorporates the EVM/SVM using the account ownership method (aka runtime proxy).
-A proxy with a delegate call forwards execution to a unique EVM/SVM loader smart contract.
+For example, Fluent architecture incorporates EVM and SVM-style integration using the account ownership method (aka runtime proxy).
+A proxy with a delegate call forwards execution to a dedicated runtime loader smart contract.
+
+> **Status note:** exact runtime-family enablement can vary by release/network.
+> Treat this section as architecture pattern guidance, and verify active runtime support in current release docs.
 This setup eliminates the need for address mapping or transaction verification.
 ABI encoding/decoding format can be used, and contracts can be managed using default EVM/SVM-compatible data structures,
 such as storage, block/transaction structures.

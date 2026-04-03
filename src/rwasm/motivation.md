@@ -16,9 +16,9 @@ This is where rWASM (Reduced WebAssembly) comes into play.
 ## Introducing rWASM
 
 rWASM is a specially modified binary intermediary representation (IR) of WASM execution.
-It retains 99% compatibility with the original WASM bytecode and instruction set
-but features a modified binary structure that avoids the pitfalls of non-ZK friendly elements,
-without altering opcode behavior.
+It targets high compatibility with original WASM bytecode and instruction semantics,
+while using a modified binary structure that avoids non-ZK-friendly elements
+without changing core opcode behavior goals.
 
 The main issue with WASM is its use of relative offsets for type mappings, function mappings, and block/loop statements,
 which complicates the proving process.

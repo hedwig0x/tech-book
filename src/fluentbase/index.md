@@ -9,20 +9,23 @@ Developers can leverage this framework to create shared applications (smart cont
 
 ## Modules
 
-- **`bin`**: Contains a binary application used for translating WASM-based applications to rWASM. Necessary only for creating system precompiled contracts requiring direct translation from WASM to rWASM.
-- **`crates`**: Houses all Fluentbase modules:
-  - **`codec`**: A custom ABI codec for encoding/decoding input messages, optimized for random reads to extract necessary information from the system context. It resembles Solidity ABI encoding but uses a more WASM-friendly binary encoding and alignment.
-  - **`contracts`**: Includes all system precompiled contracts supporting different EE compatibilities like EVM, SVM, WASM, and system contracts (e.g., Blake2, SHA256).
-  - **`core`**: The core for EE runtimes supporting EVM, SVM, and WASM, including deployment logic, AOT translation, and contract execution.
-  - **`genesis`**: A program for creating genesis files for the Fluent L2 network with precompiled system and compatibility contracts.
-  - **`poseidon`**: A library for Poseidon hashing.
-  - **`runtime`**: The basic execution runtime of rWASM enabling Fluentbase’s host functions.
-  - **`sdk`**: Provides all required types and methods for developing applications. Includes macros, entry points definitions, allocators, etc.
-  - **`types`**: Basic primitive types for all crates within the repository.
-  - **`zktrie`**: Implementation of zktrie (sparse Merkle binary trie).
-- **`e2e`**: A set of end-to-end tests for testing EVM transition and other WASM features.
-- **`revm`**: A fork of the revm crate, optimized and adapted for Fluentbase SDK methods, mapping the original revm's database objects into Fluentbase’s structures.
-- **`examples`**: Contains examples that can be built using the Fluentbase SDK.
+- **`bin`**: Binary tools used in build/runtime workflows.
+- **`crates`**: Houses Fluentbase modules. The exact set evolves, but major crate families include:
+  - **`codec` / `codec-derive`**: ABI codec and derive support.
+  - **`contracts`**: system/runtime contracts.
+  - **`crypto`**: cryptographic helpers.
+  - **`evm` / `revm`**: EVM execution and Fluent-specific REVM integration.
+  - **`genesis`**: genesis-generation utilities/assets.
+  - **`runtime`**: core runtime execution layer.
+  - **`sdk` / `sdk-derive`**: developer SDK, macros, and runtime bindings.
+  - **`types`**: shared primitive/protocol types.
+  - **`node`**: node integration components.
+  - Additional runtime-family and testing support crates (for example SVM-related and harness crates).
+- **`e2e`**: end-to-end tests for execution behavior and compatibility paths.
+- **`examples`**: contract/application examples built with Fluentbase SDK.
+
+> **Note:** older references to crate names such as `core`, `poseidon`, or `zktrie` may appear in historical discussions.
+> Always treat the current `crates/*` tree in the repository as the source of truth.
 
 ## Build and Testing
 
@@ -39,7 +42,7 @@ For testing, the complete EVM official testing suite, which consumes significant
 RUST_MIN_STACK=20000000 cargo test --no-fail-fast
 ```
 
-**Note:** Some tests are still failing (e.g., zktrie), but 99% of them pass.
+**Note:** test status evolves continuously. Check current CI and repository test reports for authoritative pass/fail state.
 
 ## Examples
 
@@ -78,9 +81,9 @@ Fluentbase SDK currently supports writing smart contracts in:
 
 ## Fluentbase Operation
 
-Fluentbase operates using Fluent's rWASM VM (reduced WebAssembly).
-This VM uses a 100% compatible WebAssembly binary representation optimized for Zero-Knowledge (ZK) operations.
-The instruction set is reduced, with sections embedded inside the binary to simplify the proving process.
+Fluentbase operates around Fluent's rWASM VM (reduced WebAssembly) and runtime integration layers.
+rWASM is Wasm-derived and optimized for Zero-Knowledge (ZK)-oriented execution/proving constraints,
+with a reduced/reshaped representation compared with unrestricted host Wasm binaries.
 
 ## Limitations and Future Enhancements
 

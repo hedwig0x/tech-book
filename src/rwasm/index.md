@@ -1,15 +1,17 @@
 # rWASM
 
-rWASM (reduced WebAssembly) is an EIP-3540 compatible binary intermediary representation (IR) of WASM (WebAssembly).
-It is designed
-to simplify the execution process of WASM binaries while maintaining 99% compatibility with original WASM features.
+rWASM (reduced WebAssembly) is a Wasm-derived intermediary representation (IR) used by Fluent’s blended execution architecture.
+
+It is designed to simplify and constrain execution representation for deterministic runtime behavior and proving efficiency,
+while keeping practical compatibility with WebAssembly development flows.
 
 ## Key Features
 
-- **ZK-Friendliness**: rWASM achieves Zero-Knowledge (ZK) friendliness by having a more flattened binary structure and a simplified instruction set.
-- **Compatibility**: rWASM retains full compatibility with WASM, ensuring that all original WASM features are preserved.
+- **ZK-friendliness**: a flatter and more constrained binary model than unrestricted Wasm module structure.
+- **Developer continuity**: keeps a Wasm-oriented workflow, so existing language/tooling ecosystems remain practical.
+- **Deterministic execution intent**: representation choices are made to support reproducible state-transition behavior.
 
 ## Important Notice
 
-rWASM is a trusted execution runtime and should not be run without proper validation.
-It is safe to translate WASM to rWASM and execute, as rWASM injects all necessary validations into the entrypoint.
+rWASM is a protocol execution representation, not a generic drop-in replacement for every host Wasm use case.
+Always use current Fluent runtime/translator tooling and validation paths when producing or executing rWASM artifacts.

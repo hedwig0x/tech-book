@@ -5,7 +5,9 @@ serving both our VM runtime and our circuit definitions.
 Each system function is replaced with a specialized ZK-gadget to speed up the proving process.
 These functions can include hashing algorithms, I/O operations, and nested call functions.
 
-> **WARNING**: The system functions API/ABI are still under development and may change in the future.
+> **WARNING**: The system functions API/ABI evolve over time.
+> The signatures/IDs shown below are historical examples from one implementation snapshot.
+> For current production development, always verify against the latest `fluentbase` SDK/runtime docs and release branch.
 
 ```rust
 #[link(wasm_import_module = "fluentbase_v1preview")]

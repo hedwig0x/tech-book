@@ -1,7 +1,7 @@
 # Account Trie
 
-The account structure in rWASM is designed to be as simple as possible, containing only the most essential fields.
-It's fully compatible with an original Ethereum account structure.
+The account structure in rWASM-oriented execution is designed to be as simple as possible, containing only the most essential fields.
+It is aligned with Ethereum account fundamentals, while Fluent can apply additional runtime metadata/routing semantics where needed.
 
 ```rust
 pub struct Account {
@@ -17,8 +17,9 @@ Fields description:
 - **`address`**: This transient field holds the account address. Currently, a 20-byte address is used to ensure compatibility with the EVM account structure. However, there is a possibility of extending this to 32 bytes in the future to align with the state trie account path, thereby enhancing interoperability.
 - **`balance`**: Represents the account balance as a 256-bit element. This is consistently expressed as a 256-bit Big Endian value, although future changes may be considered.
 - **`nonce`**: Indicates the number of transactions initiated by this account. It increments with each transaction, call, or contract creation, regardless of the operation's success.
-- **`code_hash`**: A Poseidon hash representing the translated bytecode in rWASM format.
-- **`code_size`**: Denotes the size of the compiled bytecode in rWASM IR binary format. This bytecode has successfully passed all static validations and is optimized for ZK proofs.
+- **`code_hash`**: Represents the account code hash in the active execution/account representation.
+  In routed/runtime-managed flows this may involve Fluent-specific transformations, while EVM-facing compatibility paths may expose Ethereum-expected behavior.
+- **`code_size`**: Denotes size information for the code representation used by the active runtime/account path.
 
 ## State Trie
 
