@@ -13,16 +13,14 @@ This process involves compressing the state changes using ZK proofs, specificall
    <i>The base architecture of Fluent</i>
 </p>
 
-The Fluent operates on a modified version of [Reth](https://github.com/fluentlabs-xyz/fluent),
-using its own execution engine that replaces [Revm](https://github.com/fluentlabs-xyz/revm-rwasm).
-It maintains backward compatibility with most existing Ethereum standards, such as transaction and block structures.
-However, Fluent is not confined to Reth exclusively, as it features an independent execution runtime.
+Fluent currently operates on a modified [Reth](https://github.com/fluentlabs-xyz/reth) stack,
+with Fluent-specific execution/runtime integration.
+It maintains compatibility with core Ethereum data formats (for example transactions and blocks),
+while extending runtime behavior for blended execution.
 
 Furthermore,
-Fluent enables a fork-less runtime upgrade model
-by incorporating the most critical and upgradable runtime execution codebase within the genesis state.
-The only persistent element within the runtime is the transaction format.
+Fluent is designed around a fork-less runtime upgrade model
+by keeping critical execution logic in upgradable runtime paths.
 
-Additionally, Fluent is always post-Prague compatible and does not support any EIPs implemented before the Prague fork.
-Maintaining backward compatibility with all previous forks is unnecessary.
-The EVM runtime can be upgraded to retain compatibility with EVM.
+> **Implementation note:** exact fork-level compatibility policy (for example Prague-era assumptions)
+> is release-dependent and should be validated against the active runtime/release branch rather than treated as a permanent invariant in this chapter.

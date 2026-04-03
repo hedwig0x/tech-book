@@ -32,7 +32,7 @@ This mechanism is similar to EIP-7702, but with one key difference:
 
 Once a smart contract is deployed, its ownership is permanently assigned—every contract has an owner.
 
-The runtime resolution logic is straightforward:
+A simplified runtime resolution sketch is shown below (illustrative, not a frozen implementation contract):
 
 ```rust
 pub fn resolve_precompiled_runtime_from_input(input: &[u8]) -> Address {
@@ -54,12 +54,11 @@ pub fn resolve_precompiled_runtime_from_input(input: &[u8]) -> Address {
 }
 ```
 
-Currently, Fluent supports the following runtime formats:
+Runtime families and routing labels are implementation-dependent and can evolve by release.
+The conceptual model remains the same: runtime ownership determines execution path.
 
-1. **WASM** — for compiling Wasm into rWasm.
-2. **SVM** — rPBF (ELF) binaries for running Solana applications.
-3. **ERC20** — a specialized runtime for fast ERC20 token transfers.
-4. **EVM** — for running EVM applications.
+Typical families discussed in Fluent architecture include EVM/default, Wasm-oriented paths,
+and additional runtime-specific routes where enabled by the active release.
 
 ## Account Derivation
 

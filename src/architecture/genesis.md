@@ -5,7 +5,10 @@ parameters, the genesis hash, and stores the initial blockchain state, including
 
 ## Fluent Precompiled Contracts
 
-Fluent provides the following genesis contracts:
+Fluent provides system genesis/runtime contracts.
+
+> **Status note:** exact enabled runtime set and addresses are release-dependent.
+> The list below is illustrative for this documentation revision and should be validated against current genesis assets.
 
 - **EVM**: `0x0000000000000000000000000000000000005210`
 - **WASM**: `0x0000000000000000000000000000000000005220`
