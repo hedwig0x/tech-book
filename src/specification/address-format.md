@@ -1,7 +1,7 @@
 # Address Format
 
-Address format is used to compute paths inside the tree,
-making interoperability between different EEs almost impossible without additional pre-compiled contracts and/or adapters.
+Address format is used to compute paths inside the trie,
+which makes interoperability between different EEs difficult without additional adapters, routing rules, or precompiled/runtime support.
 
 | Chain | Address Format                           | Curve     | Size     |
 |-------|------------------------------------------|-----------|----------|
@@ -11,10 +11,10 @@ making interoperability between different EEs almost impossible without addition
 
 *Table 1. Different blockchains use different address schemes and elliptic curves.*
 
-Mapping addresses is not a viable solution,
-as there is no straightforward way to prove the mapping due to different curves and Solana's use of hashed private keys.
-This would introduce additional challenges and might require developing our versions of Ethereum and Solana wallets,
-which is unlikely.
+Naive address mapping is usually insufficient,
+because proving and security assumptions differ across curves and derivation schemes.
+Practical interoperability therefore needs protocol-level design (projection/routing/compatibility layers),
+not only client-side address translation.
 
 Our account/state system leverages a Sparse Merkle Binary Trie (SMBT) powered by the Poseidon hashing function.
 This implementation utilizes 254-bit elliptic curve points

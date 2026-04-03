@@ -1,10 +1,12 @@
 # Native Precompiled Contracts
 
-Fluent allows extending any contract with additional functionality through precompiled WASM modules.
-For example, by implementing a multicall precompiled contract,
-any contract can process batched transactions when called with the multicall selector
-(`0xac9650d8`).
-This system-wide extension mechanism doesn't require modifying the original contracts.
+Fluent allows extending contract behavior through precompiled modules.
+For example, by implementing a multicall-style precompile,
+contracts can support batched execution patterns via selector-based routing.
+This extension mechanism avoids modifying original contract code.
+
+> **Status note:** exact precompile set, selector routing strategy, and activation policy are release-dependent.
+> Treat this chapter as architecture pattern guidance and confirm active precompiles in current runtime docs.
 
 ## Architecture
 
@@ -17,9 +19,9 @@ If there's a match, execution is redirected to the corresponding precompiled con
 
 Each precompiled contract has a deterministic address generated from: `keccak256("precompile")[..16] + function_selector[..4]`
 
-## Available Precompiles
+## Available Precompiles (example)
 
-### Multicall
+### Multicall (example pattern)
 
 Multicall enables batching multiple calls into a single transaction for any contract in the system.
 The implementation is compatible with OpenZeppelin's [Multicall](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Multicall.sol).

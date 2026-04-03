@@ -1,7 +1,9 @@
 # Solana Integration
 
-Solana natively supports composability with both EVM and Wasm applications. This is made possible because Fluent
-addresses Solana applications by mapping them into Fluent's account space. To achieve SVM support, a special rPBF
+Fluent’s Solana-oriented architecture targets composability with EVM and Wasm applications by mapping Solana-style applications into Fluent’s account space.
+
+> **Status note:** Solana-family runtime availability and feature completeness are release-dependent.
+> Validate current support level against active release docs before relying on this path in production. To achieve SVM support, a special rPBF
 executor is employed, which defines the execution of Solana binaries and specifies a list of mapped system bindings and
 calls. Native support for rPBF bytecode is achieved by mapping each operation into the Fluent EE space.
 
